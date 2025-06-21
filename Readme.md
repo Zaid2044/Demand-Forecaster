@@ -103,12 +103,12 @@ Run the training script to process the data, perform feature engineering, and tr
 python src/train.py
 ```
 
-3. Run the API Server
+### 3. Run the API Server
 
 Deploy the trained model as a live API.
 ```bash
 uvicorn src.api:app --reload
 ```
 
-The server will be running on http://127.0.0.1:8000.
-Go to http://127.0.0.1:8000/docs in your browser to access the interactive API documentation and make test predictions.
+-   The server will be running on http://127.0.0.1:8000.
+-    Go to http://127.0.0.1:8000/docs in your browser to access the interactive API documentation and make test predictions.
