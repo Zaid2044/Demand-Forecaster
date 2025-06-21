@@ -92,19 +92,23 @@ The project is split into three main parts: exploration, training, and API deplo
 ### 1. (Optional) Explore the Data
 
 The `notebooks/EDA.ipynb` file contains the initial data exploration and visualization. To run it:
+
 ```bash
 jupyter notebook
-
-2. Train the Advanced Model
+```
+### 2. Train the Advanced Model
 
 Run the training script to process the data, perform feature engineering, and train the LightGBM model. This will create a advanced_forecaster_model.joblib file in the models/ directory.
-
+```bash
 python src/train.py
+```
 
 3. Run the API Server
 
 Deploy the trained model as a live API.
+```bash
 uvicorn src.api:app --reload
+```
 
 The server will be running on http://127.0.0.1:8000.
 Go to http://127.0.0.1:8000/docs in your browser to access the interactive API documentation and make test predictions.
