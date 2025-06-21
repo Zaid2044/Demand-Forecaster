@@ -8,6 +8,7 @@ import joblib
 import os
 
 print("--- Starting Model Training ---")
+
 print("Loading data...")
 try:
     train_df = pd.read_csv('data/train.csv', low_memory=False)
@@ -20,22 +21,20 @@ except FileNotFoundError as e:
 
 print("Cleaning and preprocessing data...")
 df = df[(df['Open'] == 1) & (df['Sales'] > 0)]
-
 df['CompetitionDistance'].fillna(df['CompetitionDistance'].median(), inplace=True)
 df.fillna(0, inplace=True)
 
 print("Performing feature engineering...")
 df['Date'] = pd.to_datetime(df['Date'])
-
 df['Year'] = df['Date'].dt.year
 df['Month'] = df['Date'].dt.month
 df['Day'] = df['Date'].dt.day
-df['DayOfWeek'] = df['Date'].dt.dayofweek  
+df['DayOfWeek'] = df['Date'].dt.dayofweek
 df['WeekOfYear'] = df['Date'].dt.isocalendar().week.astype(int)
 
 def is_promo_active(row):
     promo_months = str(row['PromoInterval']).split(',')
-    if str(row['Date'].strftime('%b')) in promo_months:
+    if row['Date'].strftime('%b') in promo_months:
         return 1
     return 0
 
@@ -43,23 +42,23 @@ if 'PromoInterval' in df.columns:
     df['IsPromoMonth'] = df.apply(is_promo_active, axis=1)
 
 print("Preparing data for modeling...")
+df['StateHoliday'] = pd.Categorical(df['StateHoliday'].astype(str), categories=['0', 'a', 'b', 'c'], ordered=False)
+df['StoreType'] = pd.Categorical(df['StoreType'], categories=['a', 'b', 'c', 'd'], ordered=False)
+df['Assortment'] = pd.Categorical(df['Assortment'], categories=['a', 'b', 'c'], ordered=False)
 
-df['StateHoliday'] = df['StateHoliday'].astype(str)
-categorical_features = ['StoreType', 'Assortment', 'StateHoliday', 'IsPromoMonth']
+categorical_features = ['StoreType', 'Assortment', 'StateHoliday']
 df = pd.get_dummies(df, columns=categorical_features, drop_first=True)
 
 features = [
     'Store', 'DayOfWeek', 'Open', 'Promo', 'SchoolHoliday',
-    'CompetitionDistance', 'Year', 'Month', 'Day', 'WeekOfYear',
+    'CompetitionDistance', 'Year', 'Month', 'Day', 'WeekOfYear', 'IsPromoMonth',
     'StoreType_b', 'StoreType_c', 'StoreType_d',
     'Assortment_b', 'Assortment_c',
-    'StateHoliday_a', 'StateHoliday_b', 'StateHoliday_c', 'StateHoliday_0',
-    'IsPromoMonth_1'
+    'StateHoliday_a', 'StateHoliday_b', 'StateHoliday_c'
 ]
 target = 'Sales'
 
 existing_features = [f for f in features if f in df.columns]
-
 X = df[existing_features]
 y = df[target]
 
@@ -86,5 +85,4 @@ model_path = 'models/demand_forecaster_model.joblib'
 os.makedirs(os.path.dirname(model_path), exist_ok=True)
 joblib.dump(model, model_path)
 print(f"Model saved successfully at: {model_path}")
-
 print("\n--- Script Finished ---")
