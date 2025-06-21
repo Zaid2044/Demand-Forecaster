@@ -1,0 +1,22 @@
+# Virtual Environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Data files (we don't want to upload large datasets to GitHub)
+data/
+*.csv
+
+# Saved models
+models/
+*.pkl
+*.joblib
+
+# IDE specific files
+.idea/
+.vscode/
