@@ -1,114 +1,122 @@
-# 🚀 Advanced Sales Forecaster API
+<h1 align="center">🚀 Demand Forecaster API</h1>
+<p align="center">
+  An intelligent, production-ready API for predicting store sales using LightGBM and FastAPI.
+</p>
 
-An end-to-end data science project that predicts store sales using a high-performance LightGBM model. The project includes advanced feature engineering with time-series data and is deployed as a live, interactive web API using FastAPI.
-
-This project demonstrates a full machine learning lifecycle: data exploration, advanced feature engineering, model training, and production-ready API deployment.
-
----
-
-## ✨ Key Features
-
--   **High-Performance Model:** Utilizes **LightGBM**, a state-of-the-art gradient boosting framework, achieving an **R² score of over 0.90**.
--   **Advanced Feature Engineering:** Incorporates time-series features like sales lags and rolling averages, dramatically improving predictive accuracy.
--   **Live API Deployment:** The trained model is served via a **FastAPI** backend, making it a usable and scalable tool.
--   **Interactive Documentation:** The API includes automatically generated, interactive documentation (via Swagger UI) for easy testing and integration.
--   **Professional Structure:** The project is organized with a clear and professional data science structure, separating data, notebooks, source code, and saved models.
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/LightGBM-8BC34A?style=flat&logo=lightgbm&logoColor=white"/>
+  <img src="https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Scikit--Learn-F7931E?style=flat&logo=scikit-learn&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Uvicorn-333333?style=flat"/>
+</p>
 
 ---
 
-## 🛠️ Technology Stack
+## 🧠 Overview
 
--   **Python**
--   **Data Science:** Pandas, Scikit-learn, Matplotlib, Seaborn
--   **Machine Learning:** LightGBM
--   **API Framework:** FastAPI
--   **Server:** Uvicorn
--   **Tooling:** Jupyter, Joblib
+**Demand Forecaster** is a full-stack ML project that predicts store sales using advanced time-series features and a LightGBM model. Built with a clean architecture, it offers a blazing-fast REST API using FastAPI and interactive documentation via Swagger UI.
 
----
-
-## 📈 Performance
-
-The advanced model with time-series features achieves a significantly higher performance compared to a baseline model.
-
--   **R-squared (R²): 0.91**
--   **Mean Squared Error (MSE):** ~838,193
-
-This indicates the model can explain approximately 91% of the variance in the sales data.
+This project demonstrates a complete machine learning workflow:
+- 📊 Data exploration
+- 🔧 Feature engineering
+- 🧠 Model training
+- 🌐 API deployment
 
 ---
 
-## 🚀 Getting Started
+## ✨ Features
 
-Follow these instructions to get the project running on your local machine.
-
-### Prerequisites
-
--   Python 3.9+
--   Git
-
-### Installation
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/Zaid2044/Demand-Forecaster.git
-    cd Demand-Forecaster
-    ```
-
-2.  **Create and activate a Python virtual environment:**
-    ```bash
-    python -m venv venv
-    .\venv\Scripts\Activate.ps1
-    ```
-
-3.  **Install the required dependencies:**
-    A `requirements.txt` file is recommended for professional projects. Create it and add the following:
-    ```
-    pandas
-    scikit-learn
-    matplotlib
-    seaborn
-    jupyter
-    joblib
-    lightgbm
-    "fastapi[all]"
-    ```
-    Then, install from the file:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-4.  **Download the Dataset:**
-    -   Download the dataset from the [Rossmann Store Sales Kaggle page](https://www.kaggle.com/c/rossmann-store-sales/data).
-    -   Unzip the file.
-    -   Place `train.csv` and `store.csv` inside the `data/` folder.
+- ⚡ **R² score > 0.90** with optimized LightGBM model
+- 🕰️ Time-series lag features and rolling averages
+- ⚙️ Live REST API with FastAPI + Uvicorn
+- 📄 Auto-generated Swagger docs (`/docs`)
+- 📂 Clean project structure with `data/`, `models/`, `src/`, and `notebooks/`
 
 ---
 
-## ⚡ Usage
+## 🔍 Tech Stack
 
-The project is split into three main parts: exploration, training, and API deployment.
+- **Languages:** Python 3.9+
+- **Libraries:** pandas, scikit-learn, LightGBM, matplotlib, seaborn, joblib
+- **API:** FastAPI, Uvicorn
+- **Tools:** Jupyter Notebook
 
-### 1. (Optional) Explore the Data
+---
 
-The `notebooks/EDA.ipynb` file contains the initial data exploration and visualization. To run it:
+## 🚀 Performance
+
+| Metric | Value |
+|--------|-------|
+| R²     | **0.91** |
+| MSE    | ~838,193 |
+
+The model explains 91% of the variance in the dataset — solid for retail forecasting.
+
+---
+
+## ⚙️ Setup Instructions
+
+### ✅ Prerequisites
+- Python 3.9+
+- Git
+- Kaggle account to download dataset
+
+### 📦 Installation
 
 ```bash
-jupyter notebook
+git clone https://github.com/Zaid2044/Demand-Forecaster.git
+cd Demand-Forecaster
+python -m venv venv
+.\venv\Scripts\Activate.ps1
 ```
-### 2. Train the Advanced Model
 
-Run the training script to process the data, perform feature engineering, and train the LightGBM model. This will create a advanced_forecaster_model.joblib file in the models/ directory.
+### Create requirements.txt with:
+
+```nginx
+Copy
+Edit
+pandas
+scikit-learn
+matplotlib
+seaborn
+jupyter
+joblib
+lightgbm
+"fastapi[all]"
+```
+
+Then:
+
+```bash
+pip install -r requirements.txt
+```
+
+### 📥 Dataset
+Download from Kaggle: Rossmann Store Sales
+
+Place train.csv and store.csv inside the data/ folder
+
+## 🔧 How to Use
+### 1. 📊 Data Exploration
+```bash
+jupyter notebook notebooks/EDA.ipynb
+```
+
+### 2. 🧠 Train the Model
 ```bash
 python src/train.py
 ```
+Creates: models/advanced_forecaster_model.joblib
 
-### 3. Run the API Server
-
-Deploy the trained model as a live API.
+### 3. 🌐 Launch the API
 ```bash
 uvicorn src.api:app --reload
 ```
 
--   The server will be running on http://127.0.0.1:8000.
--    Go to http://127.0.0.1:8000/docs in your browser to access the interactive API documentation and make test predictions.
+Visit http://127.0.0.1:8000
+
+Explore Swagger docs at http://127.0.0.1:8000/docs
+
+## 🧑‍💻 Author
+**Zaid Ahmed**
