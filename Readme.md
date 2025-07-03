@@ -119,4 +119,4 @@ Visit http://127.0.0.1:8000
 Explore Swagger docs at http://127.0.0.1:8000/docs
 
 ## 🧑‍💻 Author
-**Zaid Ahmed**
+**MOHAMMED ZAID AHMED**
